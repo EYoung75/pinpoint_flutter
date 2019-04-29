@@ -33,7 +33,9 @@ class Landing extends StatelessWidget {
                   RaisedButton(
                     elevation: 10,
                     child: Text("Start Searching"),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/home");
+                    },
                   )
                 ],
               ),
