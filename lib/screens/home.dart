@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
+import "./results.dart";
+
 
 class Home extends StatefulWidget {
   @override
@@ -7,12 +9,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController _handleInput;
+
+  String searchTerm;
 
   void initState() {
     super.initState();
-    _handleInput = TextEditingController(text: "");
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +30,21 @@ class _HomeState extends State<Home> {
               autocorrect: true,
               clearButtonMode: OverlayVisibilityMode.editing,
               cursorColor: Colors.greenAccent,
-              controller: _handleInput,
+              onChanged: (String value) {
+                setState(() {
+                  searchTerm = value;
+                });
+              },
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(5)),
               placeholder: "Search:",
             ),
             RaisedButton(
               child: Text("Search"),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Results(searchTerm)),
+                );
+              },
               elevation: 5,
             )
           ],
