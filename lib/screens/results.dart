@@ -3,6 +3,7 @@ import "dart:async";
 import "dart:convert";
 import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
+import "./place.dart";
 
 class Results extends StatefulWidget {
   final String searchTerm;
@@ -46,7 +47,12 @@ class _ResultsState extends State<Results> {
               itemCount: content.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Place(content[index])));
+                  },
                   child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Center(
