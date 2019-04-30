@@ -54,16 +54,17 @@ class _ResultsState extends State<Results> {
                             builder: (context) => Place(content[index])));
                   },
                   child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      margin: EdgeInsets.symmetric(horizontal: 40),
                       child: Center(
                         child: Card(
                           child: Column(
                             children: <Widget>[
                               ListTile(
-                                leading: Icon(Icons.my_location),
+                                leading: Icon(Icons.store),
                                 title: Text(content[index]["name"]),
                               ),
-                              Text(content[index]["categories"][0]["name"])
+                              Text("Tags: ${content[index]["categories"][0]["name"]}"),
+                              SizedBox(height: 15,)
                             ],
                           ),
                         ),
