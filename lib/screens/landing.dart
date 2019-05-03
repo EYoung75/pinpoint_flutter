@@ -14,7 +14,7 @@ class Landing extends StatelessWidget {
           ),
           child: Center(
             child: Card(
-              elevation: 50,
+              elevation: 25,
               margin: EdgeInsets.fromLTRB(50, 150, 50, 200),
               child: Column(
                 children: <Widget>[
