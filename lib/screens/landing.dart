@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "./home.dart";
 
 class Landing extends StatelessWidget {
   @override
@@ -34,7 +35,7 @@ class Landing extends StatelessWidget {
                     elevation: 10,
                     child: Text("Start Searching"),
                     onPressed: () {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Home()));
                     },
                   )
                 ],

@@ -20,7 +20,6 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routes: {
         "/": (BuildContext context) => Landing(),
-        "/home": (BuildContext context) => Home()
       }
     );
   }

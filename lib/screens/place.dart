@@ -43,8 +43,10 @@ class Place extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                Text(place["location"]["address"],
-                    style: TextStyle(fontSize: 20)),
+                place["location"]["address"] != null
+                    ? Text(place["location"]["address"],
+                        style: TextStyle(fontSize: 20))
+                    : Text("The address for this location has not been listed"),
                 SizedBox(
                   height: 50,
                 ),
