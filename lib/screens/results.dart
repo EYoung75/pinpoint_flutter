@@ -17,35 +17,35 @@ class Results extends StatefulWidget {
 class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
-    print("${widget.currentLocation.latitude}, ${widget.currentLocation.longitude}");
     return Scaffold(
       appBar: AppBar(
         title: Text("Results for ${widget.searchTerm} near you"),
       ),
       body: Center(
-        child: Container(child: updateResults(widget.searchTerm)),
+        child: Container(child: updateResults(widget.searchTerm, widget.currentLocation)),
       ),
     );
   }
 
-  Future<Map> getResults(String clientId, String clientSecret, String searchTerm) async {
+  Future<Map> getResults(String clientId, String clientSecret, String searchTerm, var currentLocation) async {
+    print("${currentLocation.latitude},${currentLocation.longitude}");
     String apiUrl =
-        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${widget.currentLocation.latitude},${widget.currentLocation.longitude}&intent=browse&radius=250&llAcc=10000.0&query=${searchTerm}";
+        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=250&llAcc=10000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
     // print(json.decode(response.body));
     return json.decode(response.body);
   }
 
-  Widget updateResults(String searchTerm) {
+  Widget updateResults(String searchTerm, var currentLocation) {
     return FutureBuilder(
-      future: getResults(util.clientId, util.clientSecret, searchTerm),
+      future: getResults(util.clientId, util.clientSecret, searchTerm, currentLocation),
       builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
         if (snapshot.hasData) {
           var content = snapshot.data["response"]["venues"];
           print("places $content");
           return Container(
             child: ListView.builder(
-              itemCount: content.length,
+              itemCount: 4,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
