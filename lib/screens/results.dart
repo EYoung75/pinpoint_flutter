@@ -4,12 +4,11 @@ import "dart:convert";
 import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
 import "./place.dart";
-import 'package:geolocator/geolocator.dart';
-
 
 class Results extends StatefulWidget {
   final String searchTerm;
-  Results(this.searchTerm);
+  final currentLocation;
+  Results(this.searchTerm, this.currentLocation);
 
   @override
   _ResultsState createState() => _ResultsState();
@@ -18,6 +17,7 @@ class Results extends StatefulWidget {
 class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
+    print("${widget.currentLocation.latitude}, ${widget.currentLocation.longitude}");
     return Scaffold(
       appBar: AppBar(
         title: Text("Results for ${widget.searchTerm} near you"),
@@ -28,13 +28,11 @@ class _ResultsState extends State<Results> {
     );
   }
 
-  Future<Map> getResults(
-      String clientId, String clientSecret, String searchTerm) async {
-      Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      print(position);
-      String apiUrl = "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&near=Denver,CO&radius=1000&intent=browse&query=$searchTerm";
+  Future<Map> getResults(String clientId, String clientSecret, String searchTerm) async {
+    String apiUrl =
+        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${widget.currentLocation.latitude},${widget.currentLocation.longitude}&intent=browse&radius=250&llAcc=10000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
-    print(json.decode(response.body));
+    // print(json.decode(response.body));
     return json.decode(response.body);
   }
 
@@ -66,8 +64,11 @@ class _ResultsState extends State<Results> {
                                 leading: Icon(Icons.store),
                                 title: Text(content[index]["name"]),
                               ),
-                              Text("Tags: ${content[index]["categories"][0]["name"]}"),
-                              SizedBox(height: 15,)
+                              Text(
+                                  "Tags: ${content[index]["categories"][0]["name"]}"),
+                              SizedBox(
+                                height: 15,
+                              )
                             ],
                           ),
                         ),

@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
 import "./results.dart";
-
+import 'package:location/location.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,13 +9,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   String searchTerm;
+  var currentLocation;
+  var location = Location();
 
   void initState() {
     super.initState();
+    getLocation();
   }
 
+  Future getLocation() async {
+    currentLocation = await location.getLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,11 @@ class _HomeState extends State<Home> {
             RaisedButton(
               child: Text("Search"),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Results(searchTerm)),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Results(searchTerm, currentLocation)),
                 );
               },
               elevation: 5,
