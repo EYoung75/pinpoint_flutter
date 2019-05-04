@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,43 +14,60 @@ class Place extends StatelessWidget {
       body: Center(
         child: Container(
           constraints: BoxConstraints.expand(),
-          margin: EdgeInsets.fromLTRB(30, 30, 30, 100),
-          child: Card(
-            elevation: 15,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                RichText(
-                  text: TextSpan(
-                      text: place["name"],
-                      style: TextStyle(fontSize: 35, color: Colors.black),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          String query = "${place["location"]["address"]}";
-                          String url = "https://maps.google.com/?q=$query";
-                          launch("google.com");
-                        }),
+          margin: EdgeInsets.fromLTRB(10, 30, 10, 0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 500,
+                width: 500,
+                padding: EdgeInsets.all(10),
+                child: Card(
+                  elevation: 15,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        place["name"],
+                        style: TextStyle(fontSize: 35, color: Colors.black,),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        place["categories"][0]["name"],
+                        style: TextStyle(fontSize: 25),
+                      ),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      GestureDetector(
+                        onTap: () {launch("https://maps.google.com/?q=${place["location"]["address"]}");},
+                                              child: place["location"]["address"] != null
+                            ? Text(place["location"]["address"],
+                                style: TextStyle(fontSize: 20))
+                            : Text(
+                                "The address for this location has not been listed"),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  place["categories"][0]["name"],
-                  style: TextStyle(fontSize: 25),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                place["location"]["address"] != null
-                    ? Text(place["location"]["address"],
-                        style: TextStyle(fontSize: 20))
-                    : Text("The address for this location has not been listed"),
-                SizedBox(
-                  height: 50,
-                ),
-              ],
-            ),
+              ),
+              RaisedButton(
+                elevation: 10,
+                child: Text("Navigate"),
+                onPressed: () {
+                  String query = place["location"]["address"];
+                  String url = "https://maps.google.com/?q=${query}";
+                  print(query);
+                  launch(url);
+                },
+              )
+            ],
           ),
         ),
       ),

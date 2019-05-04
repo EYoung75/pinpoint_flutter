@@ -44,7 +44,7 @@ class _ResultsState extends State<Results> {
       builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
         if (snapshot.hasData) {
           var content = snapshot.data["response"]["venues"];
-          print("places $content");
+          print(content.length);
           return Container(
             child: ListView.builder(
               itemCount: 7,
