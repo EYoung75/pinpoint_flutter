@@ -1,21 +1,10 @@
+import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:url_launcher/url_launcher.dart';
 
 class Place extends StatelessWidget {
   final place;
   Place(this.place);
-
-  _launchURL() async {
-    String query = place["location"]["address"];
-    print(query);
-    // String url = "https://maps.google.com/?q=${query}";
-    String url = "google.com";
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +22,16 @@ class Place extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Text(
-                  place["name"],
-                  style: TextStyle(fontSize: 35),
+                RichText(
+                  text: TextSpan(
+                      text: place["name"],
+                      style: TextStyle(fontSize: 35, color: Colors.black),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          String query = "${place["location"]["address"]}";
+                          String url = "https://maps.google.com/?q=$query";
+                          launch("google.com");
+                        }),
                 ),
                 SizedBox(
                   height: 5,
@@ -56,11 +52,6 @@ class Place extends StatelessWidget {
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _launchURL,
-        tooltip: "Navigate",
-        child: Icon(Icons.navigation, color: Colors.white),
       ),
     );
   }

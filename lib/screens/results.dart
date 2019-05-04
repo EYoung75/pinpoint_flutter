@@ -5,6 +5,7 @@ import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
 import "./place.dart";
 
+
 class Results extends StatefulWidget {
   final String searchTerm;
   final currentLocation;
@@ -29,8 +30,9 @@ class _ResultsState extends State<Results> {
 
   Future<Map> getResults(String clientId, String clientSecret, String searchTerm, var currentLocation) async {
     print("${currentLocation.latitude},${currentLocation.longitude}");
+    print("ACCURACY: ${currentLocation.accuracy}");
     String apiUrl =
-        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=250&llAcc=10000.0&query=${searchTerm}";
+        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=250&llAcc=1000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
     // print(json.decode(response.body));
     return json.decode(response.body);
@@ -45,7 +47,7 @@ class _ResultsState extends State<Results> {
           print("places $content");
           return Container(
             child: ListView.builder(
-              itemCount: 4,
+              itemCount: 7,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {

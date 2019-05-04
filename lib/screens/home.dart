@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   }
 
   Future getLocation() async {  
-    location.changeSettings(accuracy: LocationAccuracy.HIGH);
+    await location.changeSettings(accuracy: LocationAccuracy.HIGH);
     currentLocation = await location.getLocation();
   }
 
