@@ -19,7 +19,7 @@ class _ResultsState extends State<Results> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Results for ${widget.searchTerm} near you"),
+        title: Text("${widget.searchTerm.toUpperCase()} nearest you"),
       ),
       body: Center(
         child: Container(
@@ -55,46 +55,50 @@ class _ResultsState extends State<Results> {
               ),
             ));
           } else {
-            return Column(
-              children: <Widget>[
-                Flexible(
-                  child: ListView.builder(
-                    itemCount: content.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      if(content[index] == 0 || index > content.length ) { return Text("");}
-                      else {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Place(content[index])));
-                        },
-                        child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 40),
-                            child: Center(
-                              child: Card(
-                                child: Column(
-                                  children: <Widget>[
-                                    ListTile(
-                                      leading: Icon(Icons.store),
-                                      title: Text(content[index]["name"]),
-                                    ),
-                                    Text(
-                                        "Tags: ${content[index]["categories"][0]["name"]}"),
-                                    SizedBox(
-                                      height: 15,
-                                    )
-                                  ],
+            return Container(
+              color: Theme.of(context).accentColor,
+              child: Column(
+                children: <Widget>[
+                  Flexible(
+                    child: ListView.builder(
+                      itemCount: content.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if(content[index] == 0 || index > content.length ) { return Text("");}
+                        else {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Place(content[index])));
+                          },
+                          child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 40),
+                              child: Center(
+                                child: Card(
+                                  elevation: 10,
+                                  child: Column(
+                                    children: <Widget>[
+                                      ListTile(
+                                        leading: Icon(Icons.restaurant),
+                                        title: Text(content[index]["name"]),
+                                      ),
+                                      Text(
+                                          "Tags: ${content[index]["categories"][0]["name"]}"),
+                                      SizedBox(
+                                        height: 15,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )),
-                      );
-                      }
-                    },
+                              )),
+                        );
+                        }
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
         } else {

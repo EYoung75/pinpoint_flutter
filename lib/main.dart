@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        accentColor: Colors.deepOrange,
+        accentColor: Colors.indigo[50],
         fontFamily: "Sunflower",
         textTheme: TextTheme(body1: TextStyle(fontSize: 15, fontFamily: "Sunflower"), title: TextStyle(fontFamily: "Stylish", fontSize: 35))
       ),
