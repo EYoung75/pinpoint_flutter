@@ -19,7 +19,7 @@ class _ResultsState extends State<Results> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.searchTerm.toUpperCase()} nearest you"),
+        title: Text("Results for ${widget.searchTerm.toUpperCase()} nearest you", style: TextStyle(fontFamily: "Stylish", fontSize: 20),),
       ),
       body: Center(
         child: Container(
@@ -30,12 +30,12 @@ class _ResultsState extends State<Results> {
 
   Future<Map> getResults(String clientId, String clientSecret,
       String searchTerm, var currentLocation) async {
-    print("${currentLocation.latitude},${currentLocation.longitude}");
-    print("ACCURACY: ${currentLocation.accuracy}");
+    // print("${currentLocation.latitude},${currentLocation.longitude}");
+    // print("ACCURACY: ${currentLocation.accuracy}");
     String apiUrl =
-        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=1000&llAcc=1000.0&query=${searchTerm}";
+        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=10000&llAcc=1000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
-    // print(json.decode(response.body));
+    print(json.decode(response.body));
     return json.decode(response.body);
   }
 
@@ -81,10 +81,11 @@ class _ResultsState extends State<Results> {
                                     children: <Widget>[
                                       ListTile(
                                         leading: Icon(Icons.restaurant),
-                                        title: Text(content[index]["name"]),
+                                        title: Text(content[index]["name"], style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline),),
                                       ),
                                       Text(
                                           "Tags: ${content[index]["categories"][0]["name"]}"),
+                                          Text("Distance: ${content[index]["location"]["distance"].toString()} meters"),
                                       SizedBox(
                                         height: 15,
                                       )

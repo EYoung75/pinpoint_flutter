@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Enter a keyword")),
+      appBar: AppBar(title: Text("Enter a keyword", style: TextStyle(fontFamily: "Stylish", fontSize: 30),), ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -54,7 +54,6 @@ class _HomeState extends State<Home> {
             SizedBox(height: 15,),
             RaisedButton(
               color: Theme.of(context).accentColor,
-              textColor: Colors.white,
               child: Text("Search"),
               onPressed: () {
                 if (searchTerm.length <= 2) {

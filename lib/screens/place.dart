@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:latlong/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_map/flutter_map.dart';
 
 class Place extends StatelessWidget {
   final place;
@@ -11,7 +9,7 @@ class Place extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(place["name"]),
+        title: Text(place["name"], style: TextStyle(fontFamily: "Stylish", fontSize: 25),),
       ),
       body: Center(
           child: Container(
@@ -20,7 +18,13 @@ class Place extends StatelessWidget {
             child: Column(
       children: <Widget>[
         Container(
-          height: 200,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("../../assets/map.png"),
+              fit: BoxFit.cover,
+            )
+          ),
+          height: 300,
           width: 500,
           padding: EdgeInsets.all(10),
           child: Card(
@@ -32,6 +36,7 @@ class Place extends StatelessWidget {
                 Text(
                   place["name"],
                   style: TextStyle(
+                    decoration: TextDecoration.underline,
                     fontSize: 35,
                     color: Colors.black,
                   ),
@@ -53,7 +58,7 @@ class Place extends StatelessWidget {
                         "https://maps.google.com/?q=${place["location"]["address"]}");
                   },
                   child: place["location"]["address"] != null
-                      ? Text(place["location"]["address"],
+                      ? Text("${place["location"]["address"]}",
                           style: TextStyle(fontSize: 20))
                       : Text(
                           "The address for this location has not been listed"),
@@ -66,6 +71,8 @@ class Place extends StatelessWidget {
           ),
         ),
         RaisedButton(
+          color: Colors.redAccent[200],
+          textColor: Colors.white,
           elevation: 10,
           child: Text("Navigate"),
           onPressed: () {
@@ -75,25 +82,6 @@ class Place extends StatelessWidget {
             launch(url);
           },
         ),
-        Flexible(
-              child: FlutterMap(
-                options: MapOptions(
-                  center: LatLng(56.704173, 11.543808),
-                  minZoom: 12.0,
-                  maxZoom: 14.0,
-                  zoom: 0.0,
-                  swPanBoundary: LatLng(56.6877, 11.5089),
-                  nePanBoundary: LatLng(56.7378, 11.6644),
-                ),
-                layers: [
-                  TileLayerOptions(
-                    offlineMode: true,
-                    maxZoom: 14.0,
-                    urlTemplate: 'assets/map/anholt_osmbright/{z}/{x}/{y}.png',
-                  ),
-                ],
-              ),
-            ),
       ],
             ),
           ),

@@ -16,7 +16,7 @@ class Landing extends StatelessWidget {
           child: Center(
             child: Card(
               elevation: 25,
-              margin: EdgeInsets.fromLTRB(50, 150, 50, 200),
+              margin: EdgeInsets.fromLTRB(50, 150, 50, 300),
               child: Column(
                 children: <Widget>[
                   ListTile(
