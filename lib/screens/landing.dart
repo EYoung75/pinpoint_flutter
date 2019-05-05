@@ -5,7 +5,7 @@ class Landing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("PinPoint")),
+        appBar: AppBar(title: Text("PinPoint", style: TextStyle(fontFamily: "Stylish", fontSize: 35),)),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(

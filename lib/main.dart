@@ -13,8 +13,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        accentColor: Colors.blueGrey[300],
+        primarySwatch: Colors.indigo,
+        accentColor: Colors.deepOrange,
+        fontFamily: "Sunflower",
+        textTheme: TextTheme(body1: TextStyle(fontSize: 15, fontFamily: "Sunflower"), title: TextStyle(fontFamily: "Stylish", fontSize: 35))
       ),
       debugShowCheckedModeBanner: false,
       routes: {

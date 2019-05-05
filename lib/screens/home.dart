@@ -51,7 +51,10 @@ class _HomeState extends State<Home> {
                   color: Colors.white, borderRadius: BorderRadius.circular(5)),
               placeholder: "Search:",
             ),
+            SizedBox(height: 15,),
             RaisedButton(
+              color: Theme.of(context).accentColor,
+              textColor: Colors.white,
               child: Text("Search"),
               onPressed: () {
                 if (searchTerm.length <= 2) {
