@@ -23,78 +23,81 @@ class Place extends StatelessWidget {
               Container(
                 height: 300,
                 width: 600,
-                padding: EdgeInsets.only(top: 45),
+                margin: EdgeInsets.fromLTRB(20, 45, 20, 0),
                 child: Card(
-                  elevation: 15,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        place["name"],
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                  elevation: 25,
+                  child: Container(
+                    constraints: BoxConstraints.expand(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        place["categories"][0]["name"],
-                        style: TextStyle(fontSize: 25),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
+                        Text(
+                          place["name"],
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          Text("  (143)")
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          launch(
-                              "https://maps.google.com/?q=${place["location"]["address"]}");
-                        },
-                        child: place["location"]["address"] != null
-                            ? Text("${place["location"]["address"]}",
-                                style: TextStyle(fontSize: 20))
-                            : Text(
-                                "The address for this location has not been listed"),
-                      ),
-                      Text(
-                          "(${place["location"]["distance"].toString()} meters away)"),
-                      SizedBox(
-                        height: 30,
-                      )
-                    ],
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          place["categories"][0]["name"],
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            Text("  (111)")
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            launch(
+                                "https://maps.google.com/?q=${place["location"]["address"]}");
+                          },
+                          child: place["location"]["address"] != null
+                              ? Text("${place["location"]["address"]}",
+                                  style: TextStyle(fontSize: 20))
+                              : Text(
+                                  "The address for this location has not been listed"),
+                        ),
+                        Text(
+                            "(${place["location"]["distance"].toString()} meters away)"),
+                        SizedBox(
+                          height: 30,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -104,8 +107,11 @@ class Place extends StatelessWidget {
               RaisedButton(
                 color: Colors.redAccent[200],
                 textColor: Colors.white,
-                elevation: 20,
-                child: Text("Navigate"),
+                elevation: 25,
+                child: Text(
+                  "Navigate",
+                  style: TextStyle(fontSize: 20),
+                ),
                 onPressed: () {
                   String query = place["location"]["address"];
                   String url = "https://maps.google.com/?q=${query}";

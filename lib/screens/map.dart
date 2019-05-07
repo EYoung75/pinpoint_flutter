@@ -29,11 +29,11 @@ class _MapState extends State<Map> {
           infoWindow: InfoWindow(
             title: widget.place["location"]["address"],
             snippet: "4 star rating",
+            
           ),
           onTap: () {
             CameraPosition(target: _offset);
           },
-          consumeTapEvents: false,
           icon:
               BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed)));
     });
@@ -51,7 +51,7 @@ class _MapState extends State<Map> {
       markers: _markers,
       myLocationButtonEnabled: false,
       rotateGesturesEnabled: false,
-      scrollGesturesEnabled: false,
+      // scrollGesturesEnabled: false,
       zoomGesturesEnabled: false,
       onMapCreated: _onMapCreated,
       initialCameraPosition: CameraPosition(
