@@ -14,31 +14,34 @@ class Landing extends StatelessWidget {
             )
           ),
           child: Center(
-            child: Card(
-              elevation: 25,
-              margin: EdgeInsets.fromLTRB(50, 150, 50, 300),
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                      leading: Icon(
-                    Icons.location_on,
-                  ),
-                  title: Text("PinPoint"),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(40, 20, 40, 45),
-                    child: Text(
-                      "Click the button below, type in a keyword, and find matching locations closest to you"
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              child: Card(
+                margin: EdgeInsets.fromLTRB(50, 50, 50, 200),
+                elevation: 25,
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                        leading: Icon(
+                      Icons.location_on,
                     ),
-                  ),
-                  RaisedButton(
-                    elevation: 10,
-                    child: Text("Start Searching"),
-                    onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Home()));
-                    },
-                  )
-                ],
+                    title: Text("PinPoint"),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(40, 20, 40, 45),
+                      child: Text(
+                        "Click the button below, type in a keyword, and find matching locations closest to you"
+                      ),
+                    ),
+                    RaisedButton(
+                      elevation: 10,
+                      child: Text("Start Searching"),
+                      onPressed: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Home()));
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),

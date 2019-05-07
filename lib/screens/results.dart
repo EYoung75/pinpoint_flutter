@@ -85,7 +85,7 @@ class _ResultsState extends State<Results> {
                                       ),
                                       Text(
                                           "Tags: ${content[index]["categories"][0]["name"]}"),
-                                          Text("Distance: ${content[index]["location"]["distance"].toString()} meters"),
+                                          
                                       SizedBox(
                                         height: 15,
                                       )
