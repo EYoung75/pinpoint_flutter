@@ -35,7 +35,7 @@ class _ResultsState extends State<Results> {
     String apiUrl =
         "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=10000&llAcc=1000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
-    print(json.decode(response.body));
+    // print(json.decode(response.body));
     return json.decode(response.body);
   }
 

@@ -13,7 +13,7 @@ class Map extends StatefulWidget {
 
 class _MapState extends State<Map> {
   Completer<GoogleMapController> _controller = Completer();
-  LatLng _center = LatLng(37.7825, -122.4077);
+  LatLng _center;
   Set<Marker> _markers = {};
 
   void initState() {
@@ -26,10 +26,11 @@ class _MapState extends State<Map> {
         position: _center,
         infoWindow: InfoWindow(
           title: widget.place["name"],
-          snippet: '5 Star Rating',
+          snippet: '4 Star Rating',
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
+      _center = LatLng(widget.place["location"]["lat"]+.0009, widget.place["location"]["lng"]);
     });
   }
 
@@ -43,6 +44,9 @@ class _MapState extends State<Map> {
   Widget build(BuildContext context) {
     return GoogleMap(
       markers: _markers,
+      myLocationButtonEnabled: false,
+      rotateGesturesEnabled: false,
+      scrollGesturesEnabled: false,
       onMapCreated: _onMapCreated,
       initialCameraPosition: CameraPosition(
         target: _center,
