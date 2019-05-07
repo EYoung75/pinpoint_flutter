@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:url_launcher/url_launcher.dart';
+import "./map.dart";
 
 class Place extends StatelessWidget {
   final place;
@@ -14,14 +15,9 @@ class Place extends StatelessWidget {
           style: TextStyle(fontFamily: "Stylish", fontSize: 25),
         ),
       ),
-      body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage("assets/map.png"),
-            fit: BoxFit.cover,
-          )),
-          constraints: BoxConstraints.expand(),
+      body: Stack(children: <Widget>[
+        Map(place),
+        Center(
           child: Column(
             children: <Widget>[
               Container(
@@ -54,20 +50,32 @@ class Place extends StatelessWidget {
                         place["categories"][0]["name"],
                         style: TextStyle(fontSize: 25),
                       ),
-                     SizedBox(
+                      SizedBox(
                         height: 5,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.star, color: Colors.amber,),
-                          Icon(Icons.star, color: Colors.amber,),
-                          Icon(Icons.star, color: Colors.amber,),
-                          Icon(Icons.star, color: Colors.amber,),
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
                           Text("  (143)")
                         ],
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
                       GestureDetector(
@@ -81,13 +89,18 @@ class Place extends StatelessWidget {
                             : Text(
                                 "The address for this location has not been listed"),
                       ),
-                      Text("(${place["location"]["distance"].toString()} meters away)"),
-                      SizedBox(height: 30,)
+                      Text(
+                          "(${place["location"]["distance"].toString()} meters away)"),
+                      SizedBox(
+                        height: 30,
+                      )
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(
+                height: 25,
+              ),
               RaisedButton(
                 color: Colors.redAccent[200],
                 textColor: Colors.white,
@@ -103,7 +116,7 @@ class Place extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 }
