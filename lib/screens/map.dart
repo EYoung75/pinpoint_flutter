@@ -14,7 +14,7 @@ class Map extends StatefulWidget {
 class _MapState extends State<Map> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng _center = const LatLng(37.7825, -122.4077);
+  LatLng _center = LatLng(37.7825, -122.4077);
 
   void initState() {
     super.initState();
@@ -28,9 +28,10 @@ class _MapState extends State<Map> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
+      
       onMapCreated: _onMapCreated,
       initialCameraPosition: CameraPosition(
-        target: _center,
+        target: LatLng(widget.place["location"]["lat"], widget.place["location"]["lng"]),
         zoom: 18.0,
       ),
     );
