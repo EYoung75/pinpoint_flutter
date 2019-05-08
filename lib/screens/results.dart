@@ -42,7 +42,7 @@ class _ResultsState extends State<Results> {
     // String apiUrl =
     //     "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=10000&llAcc=1000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
-    print(json.decode(response.body));
+    // print(json.decode(response.body));
     return json.decode(response.body);
     // var cool = json.decode(response.body);
     // print("COOL ${cool["results"]}");
@@ -76,6 +76,7 @@ class _ResultsState extends State<Results> {
                         if (content[index] == 0 || index > content.length) {
                           return Text("");
                         } else {
+                           print("IDDDD ${content[index]["place_id"].toString()}");
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -158,7 +159,6 @@ class _ResultsState extends State<Results> {
   }
 
   Widget _renderIfOpen(open) {
-    print("OPEN?? ${open["opening_hours"]}");
     if (open["opening_hours"] == null) {
       return Text("");
     } else {
@@ -184,7 +184,6 @@ class _ResultsState extends State<Results> {
     // } else {
     //   return Text("closed", style: TextStyle(color: Colors.red));
     // }
-    return Text("");
   }
 
   //  Widget _renderCategories(List<dynamic> types) {
