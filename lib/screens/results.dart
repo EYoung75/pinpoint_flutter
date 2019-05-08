@@ -87,7 +87,8 @@ class _ResultsState extends State<Results> {
                                   child: Column(
                                     children: <Widget>[
                                       ListTile(
-                                        leading: Icon(Icons.restaurant),
+                                        // leading: Icon(Icons.restaurant),
+                                        leading: Image.network(content[index]["icon"], scale: 3,),
                                         title: Text(content[index]["name"], style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline),),
                                       ),
                                       // commented out widgets were used when utilizing FourSquare data

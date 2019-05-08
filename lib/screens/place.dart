@@ -27,6 +27,7 @@ class Place extends StatelessWidget {
                 child: Card(
                   elevation: 25,
                   child: Container(
+                    padding: EdgeInsets.all(10),
                     constraints: BoxConstraints.expand(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,28 +57,31 @@ class Place extends StatelessWidget {
                         SizedBox(
                           height: 5,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            Text("  (111)")
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: <Widget>[
+                        //     Icon(
+                        //       Icons.star,
+                        //       color: Colors.amber,
+                        //     ),
+                        //     Icon(
+                        //       Icons.star,
+                        //       color: Colors.amber,
+                        //     ),
+                        //     Icon(
+                        //       Icons.star,
+                        //       color: Colors.amber,
+                        //     ),
+                        //     Icon(
+                        //       Icons.star,
+                        //       color: Colors.amber,
+                        //     ),
+                        //     Text(
+                        //         "   (${place["user_ratings_total"].toString()})")
+                        //   ],
+                        // ),
+                        renderRatings(place["rating"].round()),
+
                         SizedBox(
                           height: 20,
                         ),
@@ -94,7 +98,10 @@ class Place extends StatelessWidget {
                         // ),
                         // Text(
                         //     "(${place["location"]["distance"].toString()} meters away)"),
-                        Text(place["formatted_address"]),
+                        Text(
+                          place["formatted_address"],
+                          textAlign: TextAlign.center,
+                        ),
                         SizedBox(
                           height: 30,
                         )
@@ -126,5 +133,14 @@ class Place extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  Widget renderRatings(var ratings) {
+    List<Widget> list = List<Widget>();
+    for (var i = .5; i <= ratings; i++) {
+      list.add(Icon(Icons.star, color: Colors.amber,));
+    }
+    list.add(Text("  (${place["user_ratings_total"].toString()})"));
+    return Row(children: list, mainAxisAlignment: MainAxisAlignment.center,);
   }
 }
