@@ -32,11 +32,16 @@ class _ResultsState extends State<Results> {
       String searchTerm, var currentLocation) async {
     // print("${currentLocation.latitude},${currentLocation.longitude}");
     // print("ACCURACY: ${currentLocation.accuracy}");
-    String apiUrl =
-        "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=10000&llAcc=1000.0&query=${searchTerm}";
+    String apiUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=${searchTerm}&key=${util.googleMap}&location=${currentLocation.latitude},${currentLocation.longitude}&radius=5000";
+    // print(apiUrl);
+    // Below is fetch request from FourSquare API
+    // String apiUrl = 
+    //     "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=10000&llAcc=1000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
     // print(json.decode(response.body));
     return json.decode(response.body);
+    // var cool = json.decode(response.body);
+    // print("FUCK ${cool["results"]}");
   }
 
   Widget updateResults(String searchTerm, var currentLocation) {
@@ -45,7 +50,9 @@ class _ResultsState extends State<Results> {
           util.clientId, util.clientSecret, searchTerm, currentLocation),
       builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
         if (snapshot.hasData) {
-          var content = snapshot.data["response"]["venues"];
+          var content = snapshot.data["results"];
+          print("CONTENTTOOOO ${content}");
+          // var content = snapshot.data["response"]["venues"];
           if (content.length <= 0) {
             return Center(
                 child: Container(
@@ -83,9 +90,10 @@ class _ResultsState extends State<Results> {
                                         leading: Icon(Icons.restaurant),
                                         title: Text(content[index]["name"], style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline),),
                                       ),
-                                      Text(
-                                          "Tags: ${content[index]["categories"][0]["name"]}"),
-                                          
+                                      // commented out widgets were used when utilizing FourSquare data
+                                      // Text(
+                                      //     "Tags: ${content[index]["categories"][0]["name"]}"),
+                                      Text("Tags: ${content[index]["types"][0]}"),
                                       SizedBox(
                                         height: 15,
                                       )

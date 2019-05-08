@@ -48,10 +48,11 @@ class Place extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          place["categories"][0]["name"],
-                          style: TextStyle(fontSize: 25),
-                        ),
+                        // Text(
+                        //   place["categories"][0]["name"],
+                        //   style: TextStyle(fontSize: 25),
+                        // ),
+                        Text(place["types"][0], style: TextStyle(fontSize: 25)),
                         SizedBox(
                           height: 5,
                         ),
@@ -80,19 +81,20 @@ class Place extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            launch(
-                                "https://maps.google.com/?q=${place["location"]["address"]}");
-                          },
-                          child: place["location"]["address"] != null
-                              ? Text("${place["location"]["address"]}",
-                                  style: TextStyle(fontSize: 20))
-                              : Text(
-                                  "The address for this location has not been listed"),
-                        ),
-                        Text(
-                            "(${place["location"]["distance"].toString()} meters away)"),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     launch(
+                        //         "https://maps.google.com/?q=${place["location"]["address"]}");
+                        //   },
+                        //   child: place["location"]["address"] != null
+                        //       ? Text("${place["location"]["address"]}",
+                        //           style: TextStyle(fontSize: 20))
+                        //       : Text(
+                        //           "The address for this location has not been listed"),
+                        // ),
+                        // Text(
+                        //     "(${place["location"]["distance"].toString()} meters away)"),
+                        Text(place["formatted_address"]),
                         SizedBox(
                           height: 30,
                         )
