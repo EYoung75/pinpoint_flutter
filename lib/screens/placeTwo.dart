@@ -104,8 +104,24 @@ class _PlaceState extends State<Place> {
                                 content["formatted_address"],
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
-                                height: 30,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Icon(Icons.phone_forwarded),
+                                    onTap: () async {
+                                      String number =
+                                          "tel://${content["formatted_phone_number"]}";
+                                      launch(number);
+                                    },
+                                  ),
+                                  GestureDetector(child: Icon(Icons.laptop_mac), onTap: () async {
+                                      String website =
+                                          "${content["website"]}";
+                                      launch(website);
+                                    },)
+                                ],
                               )
                             ],
                           ),
@@ -127,7 +143,6 @@ class _PlaceState extends State<Place> {
                   ),
                   onPressed: () async {
                     String url = "${content["url"]}";
-                    print("NAVIGATE: ${url}");
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
