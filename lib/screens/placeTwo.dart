@@ -5,8 +5,10 @@ import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
 import "./map.dart";
 import 'package:url_launcher/url_launcher.dart';
+import "./reviews.dart";
 
 class Place extends StatefulWidget {
+  bool loaded = false;
   final place;
   Place(this.place);
   @override
@@ -23,8 +25,12 @@ class _PlaceState extends State<Place> {
           style: TextStyle(fontFamily: "Stylish", fontSize: 25),
         ),
       ),
-      body: Stack(
-        children: <Widget>[Map(widget.place), updateCard(widget.place)],
+      body: Center(
+        child: widget.loaded == true
+            ? CircularProgressIndicator()
+            : Stack(
+                children: <Widget>[Map(widget.place), updateCard(widget.place)],
+              ),
       ),
     );
   }
@@ -61,7 +67,6 @@ class _PlaceState extends State<Place> {
                     elevation: 25,
                     child: Stack(
                       children: <Widget>[
-                        // Container(padding: EdgeInsets.all(5), child: Icon(Icons.attach_money)),
                         renderCost(content["price_level"]),
                         Container(
                           decoration: BoxDecoration(
@@ -83,12 +88,6 @@ class _PlaceState extends State<Place> {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-
-                              // Text(
-                              //   place["categories"][0]["name"],
-                              //   style: TextStyle(fontSize: 25),
-                              // ),
-
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -96,10 +95,23 @@ class _PlaceState extends State<Place> {
                                       style: TextStyle(fontSize: 25)),
                                 ],
                               ),
-                              renderRatings(place["rating"].round()),
-                              Text("${content["rating"].toString()}"),
-                              Text(
-                                  "(${content["user_ratings_total"].toString()}  ratings)"),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Reviews(content)));
+                                },
+                                child: Column(
+                                  children: <Widget>[
+                                    renderRatings(place["rating"].round()),
+                                    Text("${content["rating"].toString()}"),
+                                    Text(
+                                        "(${content["user_ratings_total"].toString()}  ratings)"),
+                                  ],
+                                ),
+                              ),
                               Text(
                                 content["formatted_address"],
                                 textAlign: TextAlign.center,
@@ -116,11 +128,13 @@ class _PlaceState extends State<Place> {
                                       launch(number);
                                     },
                                   ),
-                                  GestureDetector(child: Icon(Icons.laptop_mac), onTap: () async {
-                                      String website =
-                                          "${content["website"]}";
+                                  GestureDetector(
+                                    child: Icon(Icons.laptop_mac),
+                                    onTap: () async {
+                                      String website = "${content["website"]}";
                                       launch(website);
-                                    },)
+                                    },
+                                  )
                                 ],
                               )
                             ],
