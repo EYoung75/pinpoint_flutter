@@ -18,7 +18,7 @@ class Landing extends StatelessWidget {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.fromLTRB(50, 50, 50, 350),
+          margin: EdgeInsets.fromLTRB(50, 50, 50, 100),
           child: Card(
             color: Color.fromRGBO(255, 255, 255, .95),
             elevation: 20,
@@ -30,8 +30,8 @@ class Landing extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "       PinPoint is a simple application that allows you to enter in a keyword and display only the most essential information about matching venues closest to you",
-                            style: TextStyle(fontSize: 20),
+                            "      PinPoint allows you to enter in a keyword to find matching results closest to you, and displays only the most essential information so you can stop contemplating where to go and start living",
+                            style: TextStyle(fontSize: 15),
                           ),
                           SizedBox(height: 20,),
                           Text("Click the button below to start searching", textAlign: TextAlign.center,),

@@ -26,7 +26,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Enter a keyword", style: TextStyle(fontFamily: "Stylish", fontSize: 30),), ),
+      appBar: AppBar(
+        title: Text(
+          "Enter a keyword",
+          style: TextStyle(fontFamily: "Stylish", fontSize: 30),
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -51,27 +56,35 @@ class _HomeState extends State<Home> {
                   color: Colors.white, borderRadius: BorderRadius.circular(5)),
               placeholder: "Search:",
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             RaisedButton(
               color: Theme.of(context).accentColor,
+              elevation: 5,
               child: Text("Search"),
               onPressed: () {
                 if (searchTerm.length <= 2) {
                   return AlertDialog(
                     title: Text(
                         "Please enter a keyword with more than three characters"),
-                    actions: <Widget>[RaisedButton(child: Text("close"), onPressed: () {},)],
+                    actions: <Widget>[
+                      RaisedButton(
+                        child: Text("close"),
+                        onPressed: () {},
+                      )
+                    ],
                   );
                 } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            Results(searchTerm, currentLocation)),
+                      builder: (context) =>
+                          Results(searchTerm, currentLocation),
+                    ),
                   );
                 }
               },
-              elevation: 5,
             )
           ],
         ),

@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import "./reviews.dart";
 
 class Place extends StatefulWidget {
-  bool loaded = false;
+  final bool loaded = false;
   final place;
   Place(this.place);
   @override
@@ -36,16 +36,9 @@ class _PlaceState extends State<Place> {
   }
 
   Future getDetails(place) async {
-    // print("${currentLocation.latitude},${currentLocation.longitude}");
-    // print("ACCURACY: ${currentLocation.accuracy}");
     String apiUrl =
         "https://maps.googleapis.com/maps/api/place/details/json?placeid=${place["place_id"]}&key=${util.googleMap}";
-    // print(apiUrl);
-    // Below is fetch request from FourSquare API
-    // String apiUrl =
-    //     "https://api.foursquare.com/v2/venues/search?client_id=${util.clientId}&client_secret=${util.clientSecret}&v=20180323&ll=${currentLocation.latitude},${currentLocation.longitude}&intent=browse&radius=10000&llAcc=1000.0&query=${searchTerm}";
     http.Response response = await http.get(apiUrl);
-    // print(json.decode(response.body));
     return json.decode(response.body);
   }
 
@@ -55,8 +48,18 @@ class _PlaceState extends State<Place> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           var content = snapshot.data["result"];
-          print("DATA$content");
+          return _renderContent(content);
+        } else {
           return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _renderContent(content) {
+    return Center(
             child: Column(
               children: <Widget>[
                 Container(
@@ -67,7 +70,7 @@ class _PlaceState extends State<Place> {
                     elevation: 25,
                     child: Stack(
                       children: <Widget>[
-                        renderCost(content["price_level"]),
+                        _renderCost(content["price_level"]),
                         Container(
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.black),
@@ -105,7 +108,7 @@ class _PlaceState extends State<Place> {
                                 },
                                 child: Column(
                                   children: <Widget>[
-                                    renderRatings(place["rating"].round()),
+                                    _renderRatings(content["rating"].round()),
                                     Text("${content["rating"].toString()}"),
                                     Text(
                                         "(${content["user_ratings_total"].toString()}  ratings)"),
@@ -167,16 +170,9 @@ class _PlaceState extends State<Place> {
               ],
             ),
           );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
   }
 
-  Widget renderRatings(var ratings) {
+  Widget _renderRatings(var ratings) {
     List<Widget> stars = List<Widget>();
     if (ratings != null) {
       for (var i = .5; i <= ratings; i++) {
@@ -194,7 +190,7 @@ class _PlaceState extends State<Place> {
     }
   }
 
-  Widget renderCost(var price) {
+  Widget _renderCost(var price) {
     if (price != null) {
       List<Widget> cost = List<Widget>();
       for (var i = 1; i <= price; i++) {
