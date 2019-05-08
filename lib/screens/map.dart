@@ -45,8 +45,8 @@ class _MapState extends State<Map> {
           markerId: MarkerId(_center.toString()),
           position: _center,
           infoWindow: InfoWindow(
-            title: widget.place["formatted_address"],
-            snippet: "4 star rating",
+            title: widget.place["name"],
+            snippet: widget.place["formatted_address"],
             
           ),
           onTap: () {

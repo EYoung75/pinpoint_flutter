@@ -31,6 +31,7 @@ class Place extends StatelessWidget {
                       // Container(padding: EdgeInsets.all(5), child: Icon(Icons.attach_money)),
                       renderCost(place["price_level"]),
                       Container(
+                        decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(3)),
                         padding: EdgeInsets.all(10),
                         constraints: BoxConstraints.expand(),
                         child: Column(
@@ -56,7 +57,7 @@ class Place extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text(place["types"][0],
+                                Text("${place["types"][0].toUpperCase()}",
                                     style: TextStyle(fontSize: 25)),
                               ],
                             ),
