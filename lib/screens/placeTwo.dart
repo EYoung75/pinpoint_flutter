@@ -113,7 +113,7 @@ class _PlaceState extends State<Place> {
                                 ),
                               ),
                               Text(
-                                content["formatted_address"],
+                                content["vicinity"],
                                 textAlign: TextAlign.center,
                               ),
                               Row(
