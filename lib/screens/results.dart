@@ -94,7 +94,9 @@ class _ResultsState extends State<Results> {
                                       // commented out widgets were used when utilizing FourSquare data
                                       // Text(
                                       //     "Tags: ${content[index]["categories"][0]["name"]}"),
-                                      Text("Tags: ${content[index]["types"][0]}"),
+                                      // Text("Tags: ${content[index]["types"][0]}"),
+                                      Text("Tags:", style: TextStyle(decoration: TextDecoration.underline)),
+                                      _renderCategories(content[index]["types"]),
                                       SizedBox(
                                         height: 15,
                                       )
@@ -118,5 +120,13 @@ class _ResultsState extends State<Results> {
         }
       },
     );
+  }
+
+   Widget _renderCategories(List<dynamic> types) {
+    List<Widget> list = List<Widget>();
+    for (var i = 0; i <= 2; i++) {
+      list.add(Text("${types[i]}    "));
+    }
+    return FittedBox(child: Row(children: list, mainAxisAlignment: MainAxisAlignment.spaceEvenly));
   }
 }
