@@ -21,6 +21,8 @@ class _MapState extends State<Map> {
     setState(() {
       _center = LatLng(
           widget.place["location"]["lat"], widget.place["location"]["lng"]);
+          print("COORDS: ${widget.place["location"]["lat"]}, ${widget.place["location"]["lng"]}");
+
       _offset = LatLng(widget.place["location"]["lat"] + .0009,
           widget.place["location"]["lng"]);
       _markers.add(Marker(
