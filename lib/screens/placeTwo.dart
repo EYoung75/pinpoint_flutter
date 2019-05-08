@@ -4,6 +4,7 @@ import "dart:convert";
 import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
 import "./map.dart";
+import 'package:url_launcher/url_launcher.dart';
 
 class Place extends StatefulWidget {
   final place;
@@ -23,10 +24,7 @@ class _PlaceState extends State<Place> {
         ),
       ),
       body: Stack(
-        children: <Widget>[
-          Map(widget.place),
-          updateResults(widget.place)
-        ],
+        children: <Widget>[Map(widget.place), updateCard(widget.place)],
       ),
     );
   }
@@ -45,93 +43,101 @@ class _PlaceState extends State<Place> {
     return json.decode(response.body);
   }
 
-  Widget updateResults(place) {
+  Widget updateCard(place) {
     return FutureBuilder(
       future: getDetails(place),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(snapshot.hasData) {
+        if (snapshot.hasData) {
           var content = snapshot.data["result"];
           print("DATA$content");
           return Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 350,
-                width: 600,
-                margin: EdgeInsets.fromLTRB(20, 45, 20, 0),
-                child: Card(
-                  elevation: 25,
-                  child: Stack(
-                    children: <Widget>[
-                      // Container(padding: EdgeInsets.all(5), child: Icon(Icons.attach_money)),
-                      renderCost(place["price_level"]),
-                      Container(
-                        decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(3)),
-                        padding: EdgeInsets.all(10),
-                        constraints: BoxConstraints.expand(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text(
-                              place["name"],
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 350,
+                  width: 600,
+                  margin: EdgeInsets.fromLTRB(20, 45, 20, 0),
+                  child: Card(
+                    elevation: 25,
+                    child: Stack(
+                      children: <Widget>[
+                        // Container(padding: EdgeInsets.all(5), child: Icon(Icons.attach_money)),
+                        renderCost(content["price_level"]),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(3)),
+                          padding: EdgeInsets.all(10),
+                          constraints: BoxConstraints.expand(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text(
+                                content["name"],
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
 
-                            // Text(
-                            //   place["categories"][0]["name"],
-                            //   style: TextStyle(fontSize: 25),
-                            // ),
+                              // Text(
+                              //   place["categories"][0]["name"],
+                              //   style: TextStyle(fontSize: 25),
+                              // ),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text("${place["types"][0].toUpperCase()}",
-                                    style: TextStyle(fontSize: 25)),
-                              ],
-                            ),
-                            renderRatings(place["rating"].round()),
-                            Text("${place["rating"].toString()}"),
-                            Text(
-                                "(${place["user_ratings_total"].toString()}  ratings)"),
-                            Text(
-                              place["formatted_address"],
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 30,
-                            )
-                          ],
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text("${content["types"][0].toUpperCase()}",
+                                      style: TextStyle(fontSize: 25)),
+                                ],
+                              ),
+                              renderRatings(place["rating"].round()),
+                              Text("${content["rating"].toString()}"),
+                              Text(
+                                  "(${content["user_ratings_total"].toString()}  ratings)"),
+                              Text(
+                                content["formatted_address"],
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(
+                                height: 30,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              RaisedButton(
-                color: Colors.redAccent[200],
-                textColor: Colors.white,
-                elevation: 25,
-                child: Text(
-                  "Navigate",
-                  style: TextStyle(fontSize: 20),
+                SizedBox(
+                  height: 25,
                 ),
-                onPressed: () {
-                  
-                },
-              ),
-            ],
-          ),
-        );
+                RaisedButton(
+                  color: Colors.redAccent[200],
+                  textColor: Colors.white,
+                  elevation: 25,
+                  child: Text(
+                    "Navigate",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () async {
+                    String url = "${content["url"]}";
+                    print("NAVIGATE: ${url}");
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -140,7 +146,6 @@ class _PlaceState extends State<Place> {
       },
     );
   }
-
 
   Widget renderRatings(var ratings) {
     List<Widget> stars = List<Widget>();
