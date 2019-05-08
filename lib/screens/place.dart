@@ -21,7 +21,7 @@ class Place extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Container(
-                height: 300,
+                height: 350,
                 width: 600,
                 margin: EdgeInsets.fromLTRB(20, 45, 20, 0),
                 child: Card(
@@ -53,6 +53,7 @@ class Place extends StatelessWidget {
                         //   place["categories"][0]["name"],
                         //   style: TextStyle(fontSize: 25),
                         // ),
+                        
                         Text(place["types"][0], style: TextStyle(fontSize: 25)),
                         SizedBox(
                           height: 5,
@@ -81,7 +82,7 @@ class Place extends StatelessWidget {
                         //   ],
                         // ),
                         renderRatings(place["rating"].round()),
-
+                        Text("(${place["user_ratings_total"].toString()})"),
                         SizedBox(
                           height: 20,
                         ),
@@ -137,10 +138,11 @@ class Place extends StatelessWidget {
 
   Widget renderRatings(var ratings) {
     List<Widget> list = List<Widget>();
+    list.add(SizedBox(width: 35,));
     for (var i = .5; i <= ratings; i++) {
       list.add(Icon(Icons.star, color: Colors.amber,));
     }
-    list.add(Text("  (${place["user_ratings_total"].toString()})"));
+    list.add(Text("  (${place["rating"].toString()})"));
     return Row(children: list, mainAxisAlignment: MainAxisAlignment.center,);
   }
 }
