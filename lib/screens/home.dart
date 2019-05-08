@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_645,q_50,w_1024/v1/clients/denver/4f616c91_3217_4da7_807e_ede1e41bf98e_276dbd3a-8822-49ba-9246-41767b077386.jpg"),
+                "https://images.unsplash.com/photo-1534298261662-f8fdd25317db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"),
             fit: BoxFit.cover,
           ),
         ),

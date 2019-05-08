@@ -5,46 +5,53 @@ class Landing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("PinPoint", style: TextStyle(fontFamily: "Stylish", fontSize: 35),)),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage("https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_645,q_50,w_1024/v1/clients/denver/4f616c91_3217_4da7_807e_ede1e41bf98e_276dbd3a-8822-49ba-9246-41767b077386.jpg"),
-              fit: BoxFit.cover,
-            )
+      appBar: AppBar(
+        title: Text("PinPoint",
+            style: TextStyle(fontFamily: "Stylish", fontSize: 30)),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+                "https://images.unsplash.com/photo-1456769965965-63334afeaeb8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"),
+            fit: BoxFit.cover,
           ),
-          child: Center(
-            child: Container(
-              constraints: BoxConstraints.expand(),
-              child: Card(
-                margin: EdgeInsets.fromLTRB(50, 50, 50, 200),
-                elevation: 25,
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                        leading: Icon(
-                      Icons.location_on,
-                    ),
-                    title: Text("PinPoint"),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(40, 20, 40, 45),
-                      child: Text(
-                        "Click the button below, type in a keyword, and find matching locations closest to you"
-                      ),
-                    ),
-                    RaisedButton(
-                      elevation: 10,
-                      child: Text("Start Searching"),
-                      onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Home()));
-                      },
-                    )
-                  ],
-                ),
+        ),
+        child: Container(
+          margin: EdgeInsets.fromLTRB(50, 50, 50, 350),
+          child: Card(
+            color: Color.fromRGBO(255, 255, 255, .95),
+            elevation: 20,
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      padding: EdgeInsets.all(30),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "       PinPoint is a simple application that allows you to enter in a keyword and display only the most essential information about matching venues closest to you",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(height: 20,),
+                          Text("Click the button below to start searching", textAlign: TextAlign.center,),
+                          Icon(Icons.arrow_downward)
+                        ],
+                      )),
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Home()));
+                    },
+                    child: Icon(Icons.pin_drop, color: Colors.indigo,),
+                    color: Theme.of(context).accentColor,
+                  )
+                ],
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

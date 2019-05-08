@@ -8,9 +8,14 @@ class Reviews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            "${place["name"]} reviews",
-            style: TextStyle(fontFamily: "Stylish", fontSize: 25),
+          title: Column(
+            children: <Widget>[
+              Text(
+                "${place["name"]}",
+                style: TextStyle(fontFamily: "Stylish", fontSize: 25),
+              ),
+              Text("at ${place["vicinity"]},", style: TextStyle(fontFamily: "Stylish", fontSize: 15),),
+            ],
           ),
         ),
         body: Container(
