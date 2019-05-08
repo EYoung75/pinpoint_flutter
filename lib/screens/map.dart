@@ -22,7 +22,7 @@ class _MapState extends State<Map> {
       // _center = LatLng(
       //     widget.place["location"]["lat"], widget.place["location"]["lng"]);
         _center = LatLng(widget.place["geometry"]["location"]["lat"], widget.place["geometry"]["location"]["lng"]);
-          print("COORDS: $_center");
+          // print("COORDS: $_center");
 
       // _offset = LatLng(widget.place["location"]["lat"] + .0009,
       //     widget.place["location"]["lng"]);

@@ -3,7 +3,7 @@ import "dart:async";
 import "dart:convert";
 import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
-import "./place.dart";
+import "./placeTwo.dart";
 
 class Results extends StatefulWidget {
   final String searchTerm;
@@ -59,8 +59,9 @@ class _ResultsState extends State<Results> {
           if (content.length <= 0) {
             return Center(
                 child: Container(
+                  margin: EdgeInsets.all(15),
               child: Text(
-                "No results were returned for that keyword. Please try another.",
+                "No results were returned for that keyword. Check your spelling and try again.",
                 textAlign: TextAlign.center,
               ),
             ));
@@ -76,7 +77,7 @@ class _ResultsState extends State<Results> {
                         if (content[index] == 0 || index > content.length) {
                           return Text("");
                         } else {
-                           print("IDDDD ${content[index]["place_id"].toString()}");
+                          //  print("IDDDD ${content[index]["place_id"].toString()}");
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
