@@ -62,7 +62,7 @@ class Reviews extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(40),
                       child: Text(
-                        "       ${place["reviews"][index]["text"]}",
+                        "       ${place["reviews"][index]["text"]}", style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.left,
                       ),
                     )

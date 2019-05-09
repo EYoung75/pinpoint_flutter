@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
+import "package:http/http.dart" as http;
 import "dart:async";
 import "dart:convert";
-import "package:http/http.dart" as http;
 import "../util/utils.dart" as util;
-import "./placeTwo.dart";
+import "./place.dart";
 
 class Results extends StatefulWidget {
   final String searchTerm;
@@ -83,12 +83,13 @@ class _ResultsState extends State<Results> {
                         if (content[index] == 0 || index > content.length) {
                           return Text("");
                         } else {
+                          var place = content[index];
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Place(content[index]),
+                                  builder: (context) => Place(place),
                                 ),
                               );
                             },
@@ -101,11 +102,11 @@ class _ResultsState extends State<Results> {
                                     children: <Widget>[
                                       ListTile(
                                         leading: Image.network(
-                                          content[index]["icon"],
+                                          place["icon"],
                                           scale: 3,
                                         ),
                                         title: Text(
-                                          content[index]["name"],
+                                          place["name"],
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               decoration:
@@ -119,7 +120,7 @@ class _ResultsState extends State<Results> {
                                           SizedBox(
                                             width: 25,
                                           ),
-                                          _renderIfOpen(content[index]),
+                                          _renderIfOpen(place),
                                           Spacer(),
                                           Text(
                                             "Tags:",
@@ -128,7 +129,7 @@ class _ResultsState extends State<Results> {
                                                     TextDecoration.underline),
                                           ),
                                           Text(
-                                              "   ${content[index]["types"][0]}"),
+                                              "   ${place["types"][0]}"),
                                           SizedBox(
                                             width: 25,
                                           ),

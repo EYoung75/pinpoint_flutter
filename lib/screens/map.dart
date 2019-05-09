@@ -1,7 +1,6 @@
-import 'dart:async';
-
 import "package:flutter/material.dart";
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
 
 class Map extends StatefulWidget {
   final place;
@@ -23,7 +22,8 @@ class _MapState extends State<Map> {
           widget.place["geometry"]["location"]["lng"]);
       _offset = LatLng(widget.place["geometry"]["location"]["lat"] + .0009,
           widget.place["geometry"]["location"]["lng"]);
-      _markers.add(Marker(
+      _markers.add(
+        Marker(
           markerId: MarkerId(_center.toString()),
           position: _center,
           infoWindow: InfoWindow(
@@ -33,8 +33,9 @@ class _MapState extends State<Map> {
           onTap: () {
             CameraPosition(target: _offset);
           },
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed)));
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        ),
+      );
     });
   }
 

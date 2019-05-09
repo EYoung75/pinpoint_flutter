@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
-import "./results.dart";
 import 'package:location/location.dart';
+import "./results.dart";
 
 class Home extends StatefulWidget {
   @override
@@ -60,7 +60,8 @@ class _HomeState extends State<Home> {
               height: 15,
             ),
             RaisedButton(
-              color: Theme.of(context).accentColor,
+              color: Colors.redAccent[200],
+              textColor: Colors.white,
               elevation: 5,
               child: Text("Search"),
               onPressed: () {
