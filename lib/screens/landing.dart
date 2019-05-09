@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:animator/animator.dart";
 import "./home.dart";
 
 class Landing extends StatelessWidget {
@@ -18,7 +19,7 @@ class Landing extends StatelessWidget {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.fromLTRB(50, 50, 50, 100),
+          margin: EdgeInsets.all(50),
           child: Card(
             color: Color.fromRGBO(255, 255, 255, .95),
             elevation: 20,
@@ -30,12 +31,23 @@ class Landing extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "      PinPoint allows you to enter in a keyword to find matching results closest to you, and displays only the most essential information so you can stop contemplating where to go and start living",
-                            style: TextStyle(fontSize: 15),
+                            "Welcome to PinPoint",
+                            style: TextStyle(fontSize: 35),textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 20,),
+                          Text("     It's simple. Enter in a keyword to find nearby points of interest that closely match your keyword. Only the most essential information for each place is provided so you spend less time contemplating where to go and more time living.", textAlign: TextAlign.center,),
+                          SizedBox(height: 20,),
                           Text("Click the button below to start searching", textAlign: TextAlign.center,),
-                          Icon(Icons.arrow_downward)
+                          SizedBox(height: 10,),
+                          Animator(
+                            tween: Tween<Offset>(begin: Offset(0, 0), end: Offset(0, -.5)),
+                            cycles: 100,
+                            duration: Duration(seconds: 1),
+                            builder: (anim) => FractionalTranslation(
+                              translation: anim.value,
+                              child:Icon(Icons.arrow_downward),
+                            ),
+                            )
                         ],
                       )),
                   RaisedButton(

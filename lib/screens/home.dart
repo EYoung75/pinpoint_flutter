@@ -1,6 +1,9 @@
+
+
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
 import 'package:location/location.dart';
+import "package:animator/animator.dart";
 import "./results.dart";
 
 class Home extends StatefulWidget {
@@ -63,7 +66,16 @@ class _HomeState extends State<Home> {
               color: Colors.redAccent[200],
               textColor: Colors.white,
               elevation: 5,
-              child: Text("Search"),
+              child: Animator(
+                            tween: Tween<double>(begin: 0, end: 3 * 3.14),
+                            curve: Curves.elasticIn,
+                            cycles: 100,
+                            duration: Duration(seconds: 3),
+                            builder: (anim) => Transform.rotate(
+                              angle: anim.value,
+                              child:Icon(Icons.arrow_forward),
+                            ),
+                            ),
               onPressed: () {
                 if (searchTerm.length <= 2) {
                   return AlertDialog(

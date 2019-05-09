@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  animator: ^0.1.1
   location: ^2.3.5
   google_maps_flutter: 
   url_launcher: 
