@@ -1,5 +1,3 @@
-
-
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
 import 'package:location/location.dart';
@@ -49,14 +47,15 @@ class _HomeState extends State<Home> {
             CupertinoTextField(
               autocorrect: true,
               clearButtonMode: OverlayVisibilityMode.editing,
-              cursorColor: Colors.greenAccent,
               onChanged: (String value) {
                 setState(() {
                   searchTerm = value;
                 });
               },
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
               placeholder: "Search:",
             ),
             SizedBox(
@@ -67,27 +66,19 @@ class _HomeState extends State<Home> {
               textColor: Colors.white,
               elevation: 5,
               child: Animator(
-                            tween: Tween<double>(begin: 0, end: 3 * 3.14),
-                            curve: Curves.elasticIn,
-                            cycles: 100,
-                            duration: Duration(seconds: 3),
-                            builder: (anim) => Transform.rotate(
-                              angle: anim.value,
-                              child:Icon(Icons.arrow_forward),
-                            ),
-                            ),
+                tween: Tween<double>(begin: 0, end: 3 * 3.14),
+                curve: Curves.elasticIn,
+                cycles: 100,
+                duration: Duration(seconds: 3),
+                builder: (anim) => Transform.rotate(
+                      angle: anim.value,
+                      child: Icon(Icons.arrow_forward),
+                    ),
+              ),
               onPressed: () {
                 if (searchTerm.length <= 2) {
-                  return AlertDialog(
-                    title: Text(
-                        "Please enter a keyword with more than three characters"),
-                    actions: <Widget>[
-                      RaisedButton(
-                        child: Text("close"),
-                        onPressed: () {},
-                      )
-                    ],
-                  );
+                  // Render Alert Dialog or similar widget to catch too short of input
+                  return Container();
                 } else {
                   Navigator.push(
                     context,

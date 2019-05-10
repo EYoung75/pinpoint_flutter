@@ -26,7 +26,7 @@ class _PlaceState extends State<Place> {
         ),
       ),
       body: Center(
-       child: Stack(
+        child: Stack(
           children: <Widget>[Map(thisPlace), updateCard(thisPlace)],
         ),
       ),
@@ -71,8 +71,9 @@ class _PlaceState extends State<Place> {
                   _renderCost(content["price_level"]),
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(3)),
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(3),
+                    ),
                     padding: EdgeInsets.all(10),
                     constraints: BoxConstraints.expand(),
                     child: Column(
@@ -92,16 +93,19 @@ class _PlaceState extends State<Place> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("${content["types"][0].toUpperCase()}",
-                                style: TextStyle(fontSize: 25)),
+                            Text(
+                              "${content["types"][0].toUpperCase()}",
+                              style: TextStyle(fontSize: 25),
+                            ),
                           ],
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Reviews(content)));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Reviews(content)),
+                            );
                           },
                           child: Column(
                             children: <Widget>[
@@ -113,7 +117,8 @@ class _PlaceState extends State<Place> {
                           ),
                         ),
                         Text(
-                          content["vicinity"], style: TextStyle(fontSize: 20),
+                          content["vicinity"],
+                          style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
                         Row(
@@ -133,9 +138,9 @@ class _PlaceState extends State<Place> {
                                 String website = "${content["website"]}";
                                 launch(website);
                               },
-                            )
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -172,10 +177,12 @@ class _PlaceState extends State<Place> {
     List<Widget> stars = List<Widget>();
     if (ratings != null) {
       for (var i = .5; i <= ratings; i++) {
-        stars.add(Icon(
-          Icons.star,
-          color: Colors.amber,
-        ));
+        stars.add(
+          Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+        );
       }
       return Row(
         children: stars,
@@ -190,10 +197,12 @@ class _PlaceState extends State<Place> {
     if (price != null) {
       List<Widget> cost = List<Widget>();
       for (var i = 1; i <= price; i++) {
-        cost.add(Icon(
-          Icons.attach_money,
-          color: Colors.black,
-        ));
+        cost.add(
+          Icon(
+            Icons.attach_money,
+            color: Colors.black,
+          ),
+        );
       }
       return Container(
         padding: EdgeInsets.fromLTRB(5, 5, 0, 0),

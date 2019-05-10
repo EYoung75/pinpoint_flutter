@@ -7,8 +7,10 @@ class Landing extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("PinPoint",
-            style: TextStyle(fontFamily: "Stylish", fontSize: 30)),
+        title: Text(
+          "PinPoint",
+          style: TextStyle(fontFamily: "Stylish", fontSize: 30),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -27,35 +29,57 @@ class Landing extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Container(
-                      padding: EdgeInsets.all(30),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            "Welcome to PinPoint",
-                            style: TextStyle(fontSize: 35),textAlign: TextAlign.center,
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "Welcome to PinPoint",
+                          style: TextStyle(fontSize: 35),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "     It's simple. Enter in a keyword to find nearby points of interest that closely match your keyword. Only the most essential information for each place is provided so you spend less time contemplating where to go and more time living.",
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Click the button below to start searching",
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Animator(
+                          tween: Tween<Offset>(
+                            begin: Offset(0, 0),
+                            end: Offset(0, -.5),
                           ),
-                          SizedBox(height: 20,),
-                          Text("     It's simple. Enter in a keyword to find nearby points of interest that closely match your keyword. Only the most essential information for each place is provided so you spend less time contemplating where to go and more time living.", textAlign: TextAlign.center,),
-                          SizedBox(height: 20,),
-                          Text("Click the button below to start searching", textAlign: TextAlign.center,),
-                          SizedBox(height: 10,),
-                          Animator(
-                            tween: Tween<Offset>(begin: Offset(0, 0), end: Offset(0, -.5)),
-                            cycles: 100,
-                            duration: Duration(seconds: 1),
-                            builder: (anim) => FractionalTranslation(
-                              translation: anim.value,
-                              child:Icon(Icons.arrow_downward),
-                            ),
-                            )
-                        ],
-                      )),
+                          cycles: 100,
+                          duration: Duration(seconds: 1),
+                          builder: (anim) => FractionalTranslation(
+                                translation: anim.value,
+                                child: Icon(Icons.arrow_downward),
+                              ),
+                        )
+                      ],
+                    ),
+                  ),
                   RaisedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
                     },
-                    child: Icon(Icons.pin_drop, color: Colors.indigo,),
+                    child: Icon(
+                      Icons.pin_drop,
+                      color: Colors.indigo,
+                    ),
                     color: Theme.of(context).accentColor,
                   )
                 ],
