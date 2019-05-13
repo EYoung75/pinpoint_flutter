@@ -1,17 +1,36 @@
-# flutter_pinpoint
+# PinPoint
+A place searching app built with Flutter that pulls and renders information from Google's Places and Place Details API
 
-A new Flutter project.
+## Technologies Used:
+This app was built using only Flutter and uses installed packages that can be found listed in this projects pubspec.yaml file.
 
-## Getting Started
+## To run live:
+*Must have Flutter packages installed - Must have Google API key*
 
-This project is a starting point for a Flutter application.
+1) Clone project
+2) Create an AppDelegate.m file appended to the following relative path: (i.e. /pinpoint/ios/Runner/AppDelegate.m)
 
-A few resources to get you started if this is your first Flutter project:
+3) Paste following code into AppDelegate.m file, pasting in Google API key where indicated:
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+```
+    #include "AppDelegate.h"
+    #include "GeneratedPluginRegistrant.h"
+    // Add the GoogleMaps import.
+    #import "GoogleMaps/GoogleMaps.h"
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
-# simple_pinpoint_flutter
+    @implementation AppDelegate
+
+    - (BOOL)application:(UIApplication *)application
+        didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Add the following line with your API key.
+    [GMSServices provideAPIKey:@"YOUR IOS API KEY HERE"];
+    [GeneratedPluginRegistrant registerWithRegistry:self];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+    }
+    @end   
+```
+
+4) Run project using $Flutter run
+
+
+![](petswipe.gif)
