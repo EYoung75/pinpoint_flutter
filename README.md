@@ -30,7 +30,7 @@ This app was built using only Flutter and uses installed packages that can be fo
     @end   
 ```
 
-4) Run project using $Flutter run
+4) Run project using ```$Flutter run```
 
 
-![](petswipe.gif)
+![](PinPoint.gif)
