@@ -29,11 +29,14 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.7.2
   http: ^0.12.0+1
   flutter_test:
     sdk: flutter
 
-
+flutter_icons:
+  ios: true
+  image_path: "images/pinpoint.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
@@ -49,8 +52,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - ./assets/landing_imahe.jpeg
+  assets:
+   - images/pinpoint.png
   #  - ./assets/brad-knight-780006-unsplash.jpg
   #  - images/a_dot_ham.jpeg
 
