@@ -175,7 +175,7 @@ class _PlaceState extends State<Place> {
 
   Widget _renderRatings(var ratings) {
     List<Widget> stars = List<Widget>();
-    if (ratings != null && ratings.length >= 0) {
+    if (ratings != null && ratings >= 0) {
       for (var i = .5; i <= ratings; i++) {
         stars.add(
           Icon(
@@ -194,7 +194,8 @@ class _PlaceState extends State<Place> {
   }
 
   Widget _renderCost(var price) {
-    if (price != null && price.length >= 0) {
+    print(price);
+    if (price != null && price >= 0) {
       List<Widget> cost = List<Widget>();
       for (var i = 1; i <= price; i++) {
         cost.add(
