@@ -38,7 +38,8 @@ class Reviews extends StatelessWidget {
                         padding: EdgeInsets.all(5),
                         height: 50,
                         child: Image.network(
-                            place["reviews"][index]["profile_photo_url"]),
+                          place["reviews"][index]["profile_photo_url"],
+                        ),
                       ),
                       title: Text(
                         place["reviews"][index]["author_name"],
@@ -50,7 +51,8 @@ class Reviews extends StatelessWidget {
                       trailing: Column(
                         children: <Widget>[
                           Text(
-                              "Rating: ${place["reviews"][index]["rating"].toString()}"),
+                            "Rating: ${place["reviews"][index]["rating"].toString()}",
+                          ),
                           SizedBox(
                             height: 5,
                           ),
@@ -62,7 +64,8 @@ class Reviews extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(40),
                       child: Text(
-                        "       ${place["reviews"][index]["text"]}", style: TextStyle(fontSize: 16),
+                        "       ${place["reviews"][index]["text"]}",
+                        style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.left,
                       ),
                     )
